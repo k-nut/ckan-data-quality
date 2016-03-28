@@ -17,3 +17,9 @@ The example data contained here was created by calling:
 ```
 ./create_sources.py https://data.qld.gov.au/
 ```
+
+Similarily the `create_publishers.py` script creates the `publishers.csv` file. 
+The example file included here was created by running
+```
+./create_publishers.py https://data.qld.gov.au/
+```
