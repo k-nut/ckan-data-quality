@@ -71,8 +71,6 @@ def extract_data(datum):
     import json
     for resource in datum.get('resources', {}):
         new_resource = {}
-        new_resource['id'] = datum.get('name')
-        new_resource['title'] = datum.get('title')
         try:
             new_resource['publisher_id'] = datum.get('organization', {}).get('name')
         # Not sure why but sometimes this seems to create a None object
@@ -80,6 +78,7 @@ def extract_data(datum):
         except AttributeError:
             new_resource['publisher_id'] = None
 
+        new_resource['id'] = resource.get('id')
         new_resource['format'] = resource.get('format')
         new_resource['data'] = resource.get('url')
         new_resource['last_modified'] = resource.get('last_modified')
