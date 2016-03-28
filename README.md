@@ -3,6 +3,12 @@
 This repository contains scripts that can be used to generte csv files giving information 
 about the publishers and the sources of any ckan repository.
 
+## Installation
+Create your virtual environment and install the requirements:
+```
+pip install -r requirements.txt
+```
+
 ## Usage
 
 The `create_sources.py` script can be run to create the `sources.csv` file.
