@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 This script is supplied a ckan endpoint api. It creates a `publishers.csv` file that
