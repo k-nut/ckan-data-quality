@@ -1,9 +1,14 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 This script can be called with the base url for a ckan instance.
 It creates a csv file called sources.csv that contains all available datasets
 """
-# import json
+from __future__ import division
+from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import unicode_literals
+
 import csv
 import logging
 import sys
