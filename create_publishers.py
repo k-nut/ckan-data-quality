@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+This script is supplied a ckan endpoint api. It creates a `publishers.csv` file that
+contains all the publishing organizations and their contact data
+"""
 from __future__ import division
 from __future__ import print_function
 from __future__ import absolute_import
@@ -11,6 +15,10 @@ import requests
 import click
 
 def get_organizations(base_url):
+    """
+    Makes a request to the ckan api for the given `base_url` and
+    returns the response as a dictionary
+    """
     extension = "api/3/action/organization_list"
     payload = {'all_fields':True,
                'include_groups': True,
@@ -23,20 +31,24 @@ def get_organizations(base_url):
 @click.command()
 @click.argument('base_url')
 def extract_organizations(base_url):
+    """
+    The main function.
+    """
     data = get_organizations(base_url)
-    orgas = []
-    for organization in data['result']:
-        orgas.append(parse_organization(organization))
+    orgas = [parse_organization(orga) for orga in data['result']]
     persist_organizations(orgas)
 
 
 def parse_organization(organization):
+    """
+    Converts `organization` into dicitonary that has standard
+    compliant field names
+    """
     data = {}
     data['id'] = organization.get('name', '')
     data['title'] = organization.get('display_name', '')
     for extra in organization.get('extras', []):
         key = extra.get('key')
-        # print(key)
         if key == 'contact-email':
             data['email'] = extra.get('value')
         if key == 'contact-name':
@@ -47,6 +59,9 @@ def parse_organization(organization):
     return data
 
 def persist_organizations(orgas):
+    """
+    writes the collected organizations to the `publishers.csv` file
+    """
     with open('publishers.csv', 'w') as csvfile:
         fieldnames = ['id', 'title', 'type', 'contact', 'email']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -56,4 +71,4 @@ def persist_organizations(orgas):
             writer.writerow(orga)
 
 if __name__ == "__main__":
-    extract_organizations()
+    extract_organizations()  #pylint: disable=no-value-for-parameter
