@@ -12,6 +12,7 @@ from __future__ import unicode_literals
 import csv
 import logging
 import sys
+import codecs
 
 import requests
 import click
@@ -95,7 +96,7 @@ def persist_organizations(sources):
     """
     writes the data to file
     """
-    with open('sources.csv', 'w') as csvfile:
+    with codecs.open('sources.csv', 'w', encoding="utf8") as csvfile:
         fieldnames = ['id', 'publisher_id', 'title', 'data', 'format', 'last_modified']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 

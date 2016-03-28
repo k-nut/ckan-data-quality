@@ -10,6 +10,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 
 import csv
+import codecs
 
 import requests
 import click
@@ -62,7 +63,7 @@ def persist_organizations(orgas):
     """
     writes the collected organizations to the `publishers.csv` file
     """
-    with open('publishers.csv', 'w') as csvfile:
+    with codecs.open('publishers.csv', 'w', encoding='utf-8') as csvfile:
         fieldnames = ['id', 'title', 'type', 'contact', 'email']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
