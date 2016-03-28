@@ -27,7 +27,6 @@ def get_data(base_url):
     count = data['result']['count']
     logging.info("Total datasets: %i", count)
     all_data = []
-    count = 499
     for start in range(0, count, 500):
         all_data += get_results(full_url, start)
     return all_data
