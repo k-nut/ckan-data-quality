@@ -8,6 +8,7 @@ Create your virtual environment and install the requirements:
 ```
 pip install -r requirements.txt
 ```
+You should be able to use both python2 and python3.
 
 ## Usage
 
